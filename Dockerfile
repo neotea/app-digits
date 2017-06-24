@@ -83,7 +83,7 @@ RUN sudo pip install aetros
 
 RUN sudo pip3 install pip --upgrade && sudo pip3 install tensorflow-gpu
 RUN sudo pip install pip --upgrade && sudo pip install tensorflow-gpu
-
+RUN sudo pip install scipy --upgrade
 # Install Caffe
 VOLUME /tmp
 WORKDIR /tmp
