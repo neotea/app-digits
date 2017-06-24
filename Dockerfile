@@ -51,6 +51,8 @@ RUN apt-get update && \
 	python3-pip \
 	python-protobuf \
 	python-scipy \
+	python3-scipy \
+
 	python-skimage \
 	python-sklearn \
         && apt-get build-dep -y --force-yes python-matplotlib \
@@ -75,10 +77,12 @@ VOLUME /tmp
 WORKDIR /tmp
 USER nimbix
 RUN sudo pip3 install aetros
+RUN sudo pip install aetros
 
 # Install Tensorflow for python
 
 RUN sudo pip3 install pip --upgrade && sudo pip3 install tensorflow-gpu
+RUN sudo pip install pip --upgrade && sudo pip install tensorflow-gpu
 
 # Install Caffe
 VOLUME /tmp
