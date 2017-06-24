@@ -98,7 +98,7 @@ RUN sudo apt-get install -y devscripts \
 # example location - can be customized
 USER root
 ENV CAFFE_ROOT=/usr/local/caffe-nv
-RUN git clone https://github.com/NVIDIA/caffe/tree/caffe-0.15 $CAFFE_ROOT && \
+RUN git clone -b caffe-0.15 https://github.com/NVIDIA/caffe.git $CAFFE_ROOT && \
     pip install -r $CAFFE_ROOT/python/requirements.txt
 WORKDIR $CAFFE_ROOT
 RUN mkdir build && cd ${CAFFE_ROOT}/build && cmake -DUSE_NCCL=ON -DUSE_CUDNN=ON .. && make -j4 && make install
