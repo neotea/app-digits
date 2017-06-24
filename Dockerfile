@@ -11,11 +11,14 @@ RUN apt-get update && \
         python-flaskext.wtf \
         python-gevent \
         python-h5py \
+        python3-h5py \
         python-numpy \
         python-pil \
         python-pip \
+        python3-pip \
         python-protobuf \
         python-scipy \
+        python3-scipy \
         libpng12-0 \
         libpng12-dev \
         libfreetype6 \
@@ -40,17 +43,22 @@ RUN apt-get update && \
 	python-all-dev \
 	python-dev \
 	python-h5py \
+	python3-h5py \
 	python-matplotlib \
 	python-numpy \
 	python-opencv \
 	python-pil \
 	python-pip \
+	python3-pip \
 	python-protobuf \
 	python-scipy \
 	python-skimage \
 	python-sklearn \
         && apt-get build-dep -y --force-yes python-matplotlib \
 	&& apt-get clean
+
+# Update pip
+RUN sudo pip install pip --upgrade
 
 WORKDIR /usr/share
 RUN git clone https://github.com/nimbix/DIGITS.git digits
@@ -59,6 +67,18 @@ WORKDIR ${DIGITS_ROOT}
 RUN git checkout digits-5.0-https
 RUN sudo pip install --upgrade -r $DIGITS_ROOT/requirements.txt
 RUN sudo pip install -e $DIGITS_ROOT
+
+
+
+# Install AETROS
+VOLUME /tmp
+WORKDIR /tmp
+USER nimbix
+RUN sudo pip3 install aetros
+
+# Install Tensorflow for python
+
+RUN sudo pip3 install tensorflow-gpu
 
 # Install Caffe
 VOLUME /tmp
