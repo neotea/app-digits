@@ -79,11 +79,11 @@ USER nimbix
 RUN sudo pip3 install aetros
 RUN sudo pip install aetros
 
-# Install Tensorflow for python
+# Install Tensorflow for python and update h5py and scipy
 
-RUN sudo pip3 install pip --upgrade && sudo pip3 install tensorflow-gpu
-RUN sudo pip install pip --upgrade && sudo pip install tensorflow-gpu
-RUN sudo pip install scipy --upgrade
+RUN sudo pip3 install pip --upgrade && sudo pip3 install tensorflow-gpu && sudo pip3 install scipy --upgrade && sudo pip3 install h5py --upgrade
+RUN sudo pip install pip --upgrade && sudo pip install tensorflow-gpu && sudo pip install scipy --upgrade && sudo pip install h5py --upgrade
+
 # Install Caffe
 VOLUME /tmp
 WORKDIR /tmp
