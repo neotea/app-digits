@@ -103,32 +103,32 @@ RUN git clone -b caffe-0.15 https://github.com/NVIDIA/caffe.git $CAFFE_ROOT && \
 WORKDIR $CAFFE_ROOT
 RUN mkdir build && cd ${CAFFE_ROOT}/build && cmake -DUSE_NCCL=ON -DUSE_CUDNN=ON .. && make -j4 && make install
 
-RUN mkdir -p /db
-RUN python /usr/share/digits/digits/download_data mnist /db/mnist
-RUN python /usr/share/digits/digits/download_data cifar10 /db/cifar10
-RUN python /usr/share/digits/digits/download_data cifar100 /db/cifar100
-RUN chown -R nimbix:nimbix /db
-RUN chown -R nimbix:nimbix /usr/share/digits
+# RUN mkdir -p /db
+#RUN python /usr/share/digits/digits/download_data mnist /db/mnist
+# RUN python /usr/share/digits/digits/download_data cifar10 /db/cifar10
+#RUN python /usr/share/digits/digits/download_data cifar100 /db/cifar100
+#RUN chown -R nimbix:nimbix /db
+#RUN chown -R nimbix:nimbix /usr/share/digits
 
 
-RUN apt-get install -y --force-yes nginx && apt-get clean
+#RUN apt-get install -y --force-yes nginx && apt-get clean
 # Add our custom configuration
-ADD ./conf/nginx.conf /etc/nginx/nginx.conf
-ADD ./conf/digits.site /etc/nginx/sites-available/digits.site
-RUN ln -sf /etc/nginx/sites-available/digits.site /etc/nginx/sites-enabled/digits.site
+#ADD ./conf/nginx.conf /etc/nginx/nginx.conf
+#ADD ./conf/digits.site /etc/nginx/sites-available/digits.site
+#RUN ln -sf /etc/nginx/sites-available/digits.site /etc/nginx/sites-enabled/digits.site
 
 # Add the JARVICE app-specific files
-ADD ./NAE/url.txt /etc/NAE/url.txt
-ADD ./NAE/help.html /etc/NAE/help.html
-ADD ./NAE/AppDef.json /etc/NAE/AppDef.json
-ADD ./scripts /usr/local/scripts
-ADD ./conf/digits.cfg /usr/share/digits/digits/digits.cfg
+#ADD ./NAE/url.txt /etc/NAE/url.txt
+#ADD ./NAE/help.html /etc/NAE/help.html
+#ADD ./NAE/AppDef.json /etc/NAE/AppDef.json
+#ADD ./scripts /usr/local/scripts
+#ADD ./conf/digits.cfg /usr/share/digits/digits/digits.cfg
 
 # Keep the digits logs in the standard place...append this to the output
-RUN mkdir -p /var/log/digits && touch /var/log/digits/digits.log && chown -R nimbix:nimbix /var/log/digits && chown -R nimbix:nimbix /usr/local/scripts
+#RUN mkdir -p /var/log/digits && touch /var/log/digits/digits.log && chown -R nimbix:nimbix /var/log/digits && chown -R nimbix:nimbix /usr/local/scripts
 
-RUN mkdir -p /usr/share/digits/digits
-RUN ln -sf /data/DIGITS/jobs /usr/share/digits/digits/jobs
+#RUN mkdir -p /usr/share/digits/digits
+#RUN ln -sf /data/DIGITS/jobs /usr/share/digits/digits/jobs
 
-USER nimbix
-CMD ["/usr/local/scripts/start.sh"]
+#USER nimbix
+#CMD ["/usr/local/scripts/start.sh"]
