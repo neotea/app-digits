@@ -1,5 +1,4 @@
 FROM nimbix/base-ubuntu-nvidia
-MAINTAINER Nimbix, Inc.
 
 USER root
 RUN apt-get update && \
@@ -61,13 +60,13 @@ RUN apt-get update && \
 RUN sudo pip install pip --upgrade
 RUN sudo pip3 install pip --upgrade
 
-WORKDIR /usr/share
-RUN git clone https://github.com/nimbix/DIGITS.git digits
-ENV DIGITS_ROOT=/usr/share/digits
-WORKDIR ${DIGITS_ROOT}
-RUN git checkout digits-5.0-https
-RUN sudo pip install --upgrade -r $DIGITS_ROOT/requirements.txt
-RUN sudo pip install -e $DIGITS_ROOT
+#WORKDIR /usr/share
+#RUN git clone https://github.com/nimbix/DIGITS.git digits
+#ENV DIGITS_ROOT=/usr/share/digits
+#WORKDIR ${DIGITS_ROOT}
+#RUN git checkout digits-5.0-https
+#RUN sudo pip install --upgrade -r $DIGITS_ROOT/requirements.txt
+#RUN sudo pip install -e $DIGITS_ROOT
 
 
 
