@@ -59,6 +59,7 @@ RUN apt-get update && \
 
 # Update pip
 RUN sudo pip install pip --upgrade
+RUN sudo pip3 install pip --upgrade
 
 WORKDIR /usr/share
 RUN git clone https://github.com/nimbix/DIGITS.git digits
@@ -78,7 +79,7 @@ RUN sudo pip3 install aetros
 
 # Install Tensorflow for python
 
-RUN sudo pip3 install tensorflow-gpu
+RUN sudo pip3 install pip --upgrade && sudo pip3 install tensorflow-gpu
 
 # Install Caffe
 VOLUME /tmp
